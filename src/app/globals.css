@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Bebas+Neue&family=Nunito:wght@300;400;500;600;700;800&family=Montserrat:wght@400;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+:root {
+  --color-blue: #1A3A8F;
+  --color-red: #CC2027;
+  --color-yellow: #F5C518;
+  --martial-dark: #0A0A0A;
+  --martial-dark-2: #111827;
+  --martial-accent: #CC2027;
+  --martial-gold: #F5C518;
+  --martial-text: #E5E7EB;
+  --anim-bg: #FFFFFF;
+  --anim-bg-2: #F0F4FF;
+  --anim-primary: #1A3A8F;
+  --anim-accent: #F5C518;
+  --anim-cta: #CC2027;
+  --anim-text: #1F2937;
+  --anim-success: #059669;
+  --shadow: rgba(26, 58, 143, 0.15);
+}
+
+@theme inline {
+  --color-gw-blue: #1A3A8F;
+  --color-gw-red: #CC2027;
+  --color-gw-yellow: #F5C518;
+  --color-martial-dark: #0A0A0A;
+  --color-martial-dark-2: #111827;
+  --color-martial-gold: #F5C518;
+  --color-anim-bg-2: #F0F4FF;
+  --color-anim-success: #059669;
+  --font-baloo: 'Baloo 2', cursive;
+  --font-bebas: 'Bebas Neue', sans-serif;
+  --font-nunito: 'Nunito', sans-serif;
+  --font-montserrat: 'Montserrat', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: #ffffff;
+  color: #1F2937;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-baloo { font-family: 'Baloo 2', cursive; }
+.font-bebas { font-family: 'Bebas Neue', sans-serif; }
+.font-nunito { font-family: 'Nunito', sans-serif; }
+.font-montserrat { font-family: 'Montserrat', sans-serif; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(245, 197, 24, 0.4); }
+  50% { box-shadow: 0 0 40px rgba(245, 197, 24, 0.8); }
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-marquee { animation: marquee 20s linear infinite; }
+.animate-fade-in-up { animation: fadeInUp 0.6s ease-out forwards; }
+.animate-slide-in-left { animation: slideInLeft 0.7s ease-out forwards; }
+.animate-slide-in-right { animation: slideInRight 0.7s ease-out forwards; }
+.animate-pulse-glow { animation: pulseGlow 2s ease-in-out infinite; }
+.animate-spin-slow { animation: spin-slow 8s linear infinite; }
+
+.gradient-hero-left {
+  background: linear-gradient(135deg, #E8F0FE 0%, #C7D8FD 50%, #A8C0FA 100%);
+}
+.gradient-hero-right {
+  background: linear-gradient(135deg, #111827 0%, #1a1a2e 50%, #16213e 100%);
+}
+.gradient-cta {
+  background: linear-gradient(135deg, #CC2027 0%, #1A3A8F 100%);
+}
+.gradient-trust {
+  background: linear-gradient(135deg, #1A3A8F 0%, #0f2660 100%);
+}
+
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px var(--shadow);
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #1A3A8F; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #CC2027; }
