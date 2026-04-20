@@ -22,7 +22,7 @@ function AdminLogin({ onLogin }: { onLogin: () => void }) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const adminPwd = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || "admin123";
+    const adminPwd = process.env.NEXT_PUBLIC_ADMIN_PASSWORD || "Anim@33!Gw#2025";
     if (pwd === adminPwd) {
       sessionStorage.setItem("gw_admin", "1");
       onLogin();
