@@ -1,70 +1,99 @@
-export default function HowItWorks() {
-  const steps = [
-    {
-      number: "01",
-      icon: "🔍",
-      title: "Choisissez",
-      desc: "Parcourez nos activités, thèmes et disciplines. Trouvez la formule parfaite pour votre projet.",
-      color: "bg-blue-50 border-[#1A3A8F]/20",
-      numColor: "text-[#1A3A8F]",
-    },
-    {
-      number: "02",
-      icon: "📅",
-      title: "Réservez",
-      desc: "Remplissez le formulaire en 2 minutes. Vous recevez un devis personnalisé sous 2h.",
-      color: "bg-yellow-50 border-[#F5C518]/40",
-      numColor: "text-[#F5C518]",
-    },
-    {
-      number: "03",
-      icon: "🎉",
-      title: "Profitez",
-      desc: "L'animateur s'occupe de tout. Vous vivez le moment, lui gère l'animation.",
-      color: "bg-red-50 border-[#CC2027]/20",
-      numColor: "text-[#CC2027]",
-    },
-  ];
+"use client";
+import { motion } from "framer-motion";
+import { AACard } from "@/components/ui/AACard";
 
+const steps = [
+  {
+    num: "01",
+    emoji: "📞",
+    title: "Vous contactez",
+    desc: "Formulaire, WhatsApp ou appel — Gratuit & sans engagement.",
+    color: "#FFC91F",
+  },
+  {
+    num: "02",
+    emoji: "💬",
+    title: "On échange",
+    desc: "On définit votre projet ensemble — Réponse sous 24h.",
+    color: "#6B9AEA",
+  },
+  {
+    num: "03",
+    emoji: "📋",
+    title: "Devis personnalisé",
+    desc: "Tarif transparent, adapté à vos besoins, sans mauvaise surprise.",
+    color: "#F07278",
+  },
+  {
+    num: "04",
+    emoji: "🎉",
+    title: "On s'occupe de tout",
+    desc: "Matériel, animation, sourires garantis — vous profitez.",
+    color: "#FFE082",
+  },
+];
+
+export function HowItWorks() {
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-14">
-          <span className="font-montserrat font-bold text-xs text-[#1A3A8F] uppercase tracking-widest bg-blue-50 px-3 py-1.5 rounded-full">
-            Simple comme bonjour
-          </span>
-          <h2 className="font-baloo font-bold text-4xl text-[#1F2937] mt-4 mb-3">
-            Comment ça marche ?
+    <section className="bg-aa-paper py-20 lg:py-28 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.5 }}
+        >
+          <p className="font-hand text-3xl text-aa-ink/70 mb-2 rotate-1 inline-block">
+            Simple, rapide, efficace
+          </p>
+          <h2
+            className="font-display text-aa-ink tracking-tight"
+            style={{ fontSize: "clamp(40px, 6vw, 88px)", lineHeight: 0.95 }}
+          >
+            Comment ça <span className="text-aa-red">marche ?</span>
           </h2>
-          <p className="text-gray-500 text-lg">En 3 étapes, votre aventure est organisée.</p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
-          {/* Arrow connectors */}
-          <div className="hidden md:block absolute top-1/2 left-1/3 -translate-y-1/2 -translate-x-1/2 z-10">
-            <svg width="40" height="20" viewBox="0 0 40 20">
-              <path d="M0 10 L30 10 M25 5 L30 10 L25 15" stroke="#D1D5DB" strokeWidth="2" fill="none" strokeLinecap="round" />
-            </svg>
-          </div>
-          <div className="hidden md:block absolute top-1/2 left-2/3 -translate-y-1/2 -translate-x-1/2 z-10">
-            <svg width="40" height="20" viewBox="0 0 40 20">
-              <path d="M0 10 L30 10 M25 5 L30 10 L25 15" stroke="#D1D5DB" strokeWidth="2" fill="none" strokeLinecap="round" />
-            </svg>
-          </div>
+        <div className="relative">
+          {/* Ligne pointillée desktop */}
+          <div
+            aria-hidden
+            className="hidden lg:block absolute top-[60px] left-[8%] right-[8%] h-1"
+            style={{
+              backgroundImage:
+                "repeating-linear-gradient(90deg, #FFC91F 0 14px, transparent 14px 26px)",
+            }}
+          />
 
-          {steps.map((step, i) => (
-            <div
-              key={i}
-              className={`relative rounded-3xl p-8 border-2 ${step.color} transition-all duration-300 hover:-translate-y-2`}
-            >
-              <div className={`font-bebas text-6xl ${step.numColor} leading-none mb-4 opacity-30`}>
-                {step.number}
-              </div>
-              <div className="text-4xl mb-4">{step.icon}</div>
-              <h3 className="font-baloo font-bold text-xl text-[#1F2937] mb-3">{step.title}</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">{step.desc}</p>
-            </div>
-          ))}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+            {steps.map((s, i) => (
+              <motion.div
+                key={s.num}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-80px" }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+                className="flex flex-col items-center text-center"
+              >
+                <div
+                  className="w-28 h-28 rounded-full border-3 border-aa-ink shadow-pop-md flex items-center justify-center mb-5 relative z-10"
+                  style={{ backgroundColor: s.color }}
+                >
+                  <span className="text-5xl">{s.emoji}</span>
+                </div>
+                <AACard color="#FFFDF6" className="w-full">
+                  <span className="font-display text-aa-red text-4xl block mb-1">
+                    {s.num}
+                  </span>
+                  <h3 className="font-display text-xl uppercase tracking-tight text-aa-ink mb-2">
+                    {s.title}
+                  </h3>
+                  <p className="text-aa-ink/70 text-sm leading-relaxed">{s.desc}</p>
+                </AACard>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -1,282 +1,225 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, Phone, Calendar, ChevronDown } from "lucide-react";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, ChevronDown, Phone } from "lucide-react";
+import { AAButton } from "@/components/ui/AAButton";
+import { cn } from "@/lib/utils";
 
-const animationLinks = [
-  { href: "/animation/anniversaires/ninja", label: "Anniversaire Ninja" },
-  { href: "/animation/anniversaires/koh-lanta", label: "Koh Lanta" },
-  { href: "/animation/anniversaires/guerrier-vietnamien", label: "Guerrier Vietnamien" },
-  { href: "/animation/anniversaires/fort-boyard", label: "Fort Boyard" },
-  { href: "/animation/anniversaires/super-heros", label: "Super Héros" },
-  { href: "/animation/anniversaires/olympiades", label: "Olympiades" },
-  { href: "/animation/grands-jeux", label: "Grands Jeux" },
-  { href: "/animation/stages-vacances", label: "Stages Vacances" },
-  { href: "/animation/team-building", label: "Team Building" },
+const navLinks = [
+  {
+    label: "Prestations",
+    href: "/prestations",
+    children: [
+      { label: "🎂 Anniversaires", href: "/prestations/anniversaires" },
+      { label: "💍 Mariages", href: "/prestations/mariages" },
+      { label: "🥂 EVG / EVF", href: "/prestations/evg-evf" },
+      { label: "🏢 Team Building", href: "/prestations/team-building" },
+      { label: "🎯 Grands Jeux", href: "/prestations/grands-jeux" },
+      { label: "🏫 Écoles & Loisirs", href: "/prestations/ecoles-loisirs" },
+    ],
+  },
+  { label: "Galerie", href: "/galerie" },
+  { label: "À propos", href: "/a-propos" },
+  { label: "Contact", href: "/contact" },
 ];
 
-const martialsLinks = [
-  { href: "/arts-martiaux/vovinam", label: "Vovinam Viet Vo Dao" },
-  { href: "/arts-martiaux/kick-boxing", label: "Sports de combat" },
-  { href: "/arts-martiaux/self-defense", label: "Self-Défense" },
-];
-
-export default function Header() {
+export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [animDropdown, setAnimDropdown] = useState(false);
-  const [martialDropdown, setMartialDropdown] = useState(false);
-  const [mobileAnim, setMobileAnim] = useState(false);
-  const [mobileMartial, setMobileMartial] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    const handleScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-white shadow-md text-gray-800"
-          : "bg-white/80 backdrop-blur-md text-gray-800"
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
+    <>
+      <motion.header
+        className={cn(
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-aa-yellow",
+          scrolled
+            ? "border-b-4 border-aa-ink shadow-pop-md py-2"
+            : "border-b-3 border-aa-ink py-3"
+        )}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between gap-4">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 shrink-0">
-            <div className="flex flex-col leading-none">
-              <span className="font-bebas text-2xl tracking-widest text-[#F5C518]">
-                ANIM&apos;
-              </span>
-              <span
-                className="font-bebas text-2xl tracking-widest text-[#1A3A8F]"
-              >
-                ACTION33
-              </span>
-            </div>
-            <div className="w-px h-10 bg-current opacity-30 hidden sm:block" />
-            <div
-              className="hidden sm:flex flex-col text-xs leading-tight text-gray-600"
+          <Link href="/" className="flex items-center gap-3 shrink-0">
+            <motion.div
+              whileHover={{ rotate: [-2, 2, -2, 0], transition: { duration: 0.4 } }}
             >
-              <span>Animation</span>
-              <span>Arts Martiaux</span>
+              <Image
+                src="/logo-icon.svg"
+                alt="AnimAction33"
+                width={60}
+                height={60}
+                className="object-contain"
+                priority
+              />
+            </motion.div>
+            <div className="flex flex-col leading-none">
+              <span className="font-display text-2xl text-aa-blue tracking-tight">
+                ANIMACTION
+              </span>
+              <span className="font-display text-2xl text-aa-red tracking-tight -mt-1">
+                33
+              </span>
             </div>
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-6">
-            {/* Animations dropdown */}
-            <div
-              className="relative"
-              onMouseEnter={() => setAnimDropdown(true)}
-              onMouseLeave={() => setAnimDropdown(false)}
-            >
-              <button
-                className="flex items-center gap-1 font-medium text-sm transition-colors hover:text-[#F5C518] text-gray-700"
+          {/* Nav desktop */}
+          <nav className="hidden lg:flex items-center gap-1">
+            {navLinks.map((link) => (
+              <div
+                key={link.label}
+                className="relative"
+                onMouseEnter={() => link.children && setActiveDropdown(link.label)}
+                onMouseLeave={() => setActiveDropdown(null)}
               >
-                Animations <ChevronDown size={14} />
-              </button>
-              {animDropdown && (
-                <div className="absolute top-full left-0 mt-1 w-56 bg-white rounded-xl shadow-xl border border-gray-100 py-2 z-50">
-                  <div className="px-3 py-1 text-xs font-montserrat font-bold text-[#1A3A8F] uppercase tracking-wider">
-                    Anniversaires
-                  </div>
-                  {animationLinks.slice(0, 6).map((l) => (
-                    <Link
-                      key={l.href}
-                      href={l.href}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-[#1A3A8F]"
-                    >
-                      {l.label}
-                    </Link>
-                  ))}
-                  <div className="border-t border-gray-100 my-1" />
-                  <div className="px-3 py-1 text-xs font-montserrat font-bold text-[#1A3A8F] uppercase tracking-wider">
-                    Autres
-                  </div>
-                  {animationLinks.slice(6).map((l) => (
-                    <Link
-                      key={l.href}
-                      href={l.href}
-                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-[#1A3A8F]"
-                    >
-                      {l.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
+                <Link
+                  href={link.href}
+                  className={cn(
+                    "flex items-center gap-1 px-4 py-2 rounded-xl font-display text-sm uppercase tracking-wide text-aa-ink",
+                    "hover:bg-aa-ink hover:text-aa-paper transition-all duration-150 border-2 border-transparent hover:border-aa-ink hover:shadow-pop-sm"
+                  )}
+                >
+                  {link.label}
+                  {link.children && (
+                    <ChevronDown
+                      size={14}
+                      className={cn(
+                        "transition-transform duration-200",
+                        activeDropdown === link.label && "rotate-180"
+                      )}
+                    />
+                  )}
+                </Link>
 
-            {/* Arts Martiaux dropdown */}
-            <div
-              className="relative"
-              onMouseEnter={() => setMartialDropdown(true)}
-              onMouseLeave={() => setMartialDropdown(false)}
-            >
-              <button
-                className="flex items-center gap-1 font-medium text-sm transition-colors hover:text-[#F5C518] text-gray-700"
-              >
-                Arts Martiaux <ChevronDown size={14} />
-              </button>
-              {martialDropdown && (
-                <div className="absolute top-full left-0 mt-1 w-52 bg-gray-900 rounded-xl shadow-xl py-2 z-50">
-                  {martialsLinks.map((l) => (
-                    <Link
-                      key={l.href}
-                      href={l.href}
-                      className="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-800 hover:text-[#F5C518]"
+                <AnimatePresence>
+                  {link.children && activeDropdown === link.label && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 8, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 8, scale: 0.95 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute top-full left-0 mt-2 w-56 bg-aa-paper border-3 border-aa-ink rounded-2xl shadow-pop-lg overflow-hidden z-50"
                     >
-                      {l.label}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {[
-              { href: "/tarifs", label: "Tarifs" },
-              { href: "/a-propos", label: "À Propos" },
-              { href: "/contact", label: "Contact" },
-            ].map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                className="font-medium text-sm transition-colors hover:text-[#F5C518] text-gray-700"
-              >
-                {l.label}
-              </Link>
+                      {link.children.map((child, i) => (
+                        <Link
+                          key={i}
+                          href={child.href}
+                          className="flex items-center px-4 py-3 text-sm font-body font-semibold text-aa-ink hover:bg-aa-yellow hover:pl-6 transition-all duration-150 border-b border-aa-ink/10 last:border-b-0"
+                        >
+                          {child.label}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             ))}
           </nav>
 
-          {/* Desktop CTA */}
+          {/* CTA desktop */}
           <div className="hidden lg:flex items-center gap-3">
             <a
               href="tel:0677243675"
-              className="flex items-center gap-2 text-sm font-semibold transition-colors text-[#1A3A8F]"
+              className="flex items-center gap-2 px-4 py-2 font-display text-sm text-aa-ink border-2 border-aa-ink rounded-xl hover:bg-aa-ink hover:text-aa-paper transition-all shadow-pop-sm"
             >
               <Phone size={16} />
               06 77 24 36 75
             </a>
-            <Link
-              href="/contact"
-              className="flex items-center gap-2 bg-[#CC2027] text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-red-700 transition-colors"
-            >
-              <Calendar size={15} />
-              Réserver
-            </Link>
+            <AAButton variant="primary" size="sm" href="/contact">
+              Devis gratuit
+            </AAButton>
           </div>
 
-          {/* Mobile hamburger */}
-          <div className="flex items-center gap-3 lg:hidden">
-            <a
-              href="tel:0677243675"
-              className="p-2 rounded-lg text-[#1A3A8F]"
-            >
-              <Phone size={20} />
-            </a>
-            <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="p-2 rounded-lg text-gray-700"
-            >
-              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
+          {/* Burger mobile */}
+          <button
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label={mobileOpen ? "Fermer le menu" : "Ouvrir le menu"}
+            className="lg:hidden w-12 h-12 flex items-center justify-center bg-aa-ink text-aa-paper rounded-xl border-2 border-aa-ink shadow-pop-sm"
+          >
+            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
         </div>
-      </div>
+      </motion.header>
 
-      {/* Mobile drawer */}
-      {mobileOpen && (
-        <div className="lg:hidden bg-white border-t border-gray-100 shadow-xl max-h-screen overflow-y-auto">
-          <div className="p-4 space-y-1">
-            {/* Animations */}
-            <button
-              onClick={() => setMobileAnim(!mobileAnim)}
-              className="w-full flex items-center justify-between px-4 py-3 rounded-lg text-gray-800 font-semibold hover:bg-blue-50"
-            >
-              <span>Animations</span>
-              <ChevronDown
-                size={16}
-                className={`transition-transform ${mobileAnim ? "rotate-180" : ""}`}
-              />
-            </button>
-            {mobileAnim && (
-              <div className="pl-4 space-y-1">
-                {animationLinks.map((l) => (
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="fixed inset-0 z-40 bg-aa-ink flex flex-col pt-24 px-6 pb-8 overflow-y-auto"
+          >
+            <nav className="flex flex-col gap-3">
+              {navLinks.map((link, i) => (
+                <motion.div
+                  key={link.label}
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05 + 0.1 }}
+                >
                   <Link
-                    key={l.href}
-                    href={l.href}
+                    href={link.href}
                     onClick={() => setMobileOpen(false)}
-                    className="block px-4 py-2 text-sm text-gray-600 hover:text-[#1A3A8F]"
+                    className="flex items-center justify-between px-5 py-4 bg-aa-yellow border-3 border-aa-paper rounded-2xl font-display text-lg uppercase tracking-wide text-aa-ink shadow-pop-sm"
                   >
-                    {l.label}
+                    {link.label}
+                    {link.children && <ChevronDown size={20} />}
                   </Link>
-                ))}
-              </div>
-            )}
-
-            {/* Arts Martiaux */}
-            <button
-              onClick={() => setMobileMartial(!mobileMartial)}
-              className="w-full flex items-center justify-between px-4 py-3 rounded-lg text-gray-800 font-semibold hover:bg-gray-50"
-            >
-              <span>Arts Martiaux</span>
-              <ChevronDown
-                size={16}
-                className={`transition-transform ${mobileMartial ? "rotate-180" : ""}`}
-              />
-            </button>
-            {mobileMartial && (
-              <div className="pl-4 space-y-1">
-                {martialsLinks.map((l) => (
-                  <Link
-                    key={l.href}
-                    href={l.href}
-                    onClick={() => setMobileOpen(false)}
-                    className="block px-4 py-2 text-sm text-gray-600 hover:text-[#1A3A8F]"
-                  >
-                    {l.label}
-                  </Link>
-                ))}
-              </div>
-            )}
-
-            {[
-              { href: "/tarifs", label: "Tarifs" },
-              { href: "/a-propos", label: "À Propos" },
-              { href: "/contact", label: "Contact" },
-            ].map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                onClick={() => setMobileOpen(false)}
-                className="block px-4 py-3 rounded-lg text-gray-800 font-semibold hover:bg-gray-50"
-              >
-                {l.label}
-              </Link>
-            ))}
-
-            <div className="pt-4 border-t border-gray-100 space-y-3">
+                  {link.children && (
+                    <div className="pl-4 mt-2 flex flex-col gap-1">
+                      {link.children.map((child, j) => (
+                        <Link
+                          key={j}
+                          href={child.href}
+                          onClick={() => setMobileOpen(false)}
+                          className="px-4 py-2.5 bg-aa-paper/10 text-aa-paper rounded-xl font-body font-semibold text-sm hover:bg-aa-paper/20 transition-colors"
+                        >
+                          {child.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </motion.div>
+              ))}
+            </nav>
+            <div className="mt-8 flex flex-col gap-3">
               <a
                 href="tel:0677243675"
-                className="flex items-center justify-center gap-2 w-full bg-[#1A3A8F] text-white py-3 rounded-xl font-bold"
+                className="flex items-center justify-center gap-2 px-6 py-4 bg-aa-paper text-aa-ink border-3 border-aa-paper rounded-2xl font-display uppercase text-lg shadow-pop-sm"
               >
-                <Phone size={18} /> 06 77 24 36 75
+                <Phone size={20} /> 06 77 24 36 75
               </a>
-              <Link
+              <AAButton
+                variant="accent"
+                size="lg"
                 href="/contact"
                 onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-center gap-2 w-full bg-[#CC2027] text-white py-3 rounded-xl font-bold"
               >
-                <Calendar size={18} /> Réserver maintenant
-              </Link>
+                Demander un devis gratuit
+              </AAButton>
             </div>
-          </div>
-        </div>
-      )}
-    </header>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

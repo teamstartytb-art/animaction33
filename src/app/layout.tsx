@@ -1,53 +1,46 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-import StickyBar from "@/components/layout/StickyBar";
-import WhatsAppButton from "@/components/shared/WhatsAppButton";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
+import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
+import { SplashScreen } from "@/components/layout/SplashScreen";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://animaction33.fr"),
   title: {
-    template: "%s | Anim'Action33 — Animation & Arts Martiaux Libourne",
-    default: "Anim'Action33 — Animation Outdoor & Arts Martiaux | Libourne, Gironde",
+    template: "%s | AnimAction33",
+    default: "AnimAction33 — Vivez l'Animation Autrement | Libourne, Gironde",
   },
   description:
-    "Animations anniversaires sur thème, stages vacances, team building et sports de combat (Vovinam, Self-Défense) à Libourne et en Gironde. Animateur professionnel certifié BAFD.",
+    "Animateur événementiel professionnel à Libourne et dans toute la Gironde. Anniversaires, mariages, EVG/EVF, team building, grands jeux, écoles. Créateur d'expériences immersives — AnimAction33.",
   keywords: [
-    "animation anniversaire enfant Libourne",
-    "anniversaire ninja Gironde",
-    "anniversaire koh lanta enfant Bordeaux",
-    "stage vacances enfant Libourne",
-    "cours arts martiaux Libourne",
-    "vovinam Libourne",
-    "cours particulier self défense Gironde",
-    "team building outdoor Bordeaux",
-    "animateur grand jeux extérieur Gironde",
-    "sports de combat cours particulier Bordeaux",
+    "animateur Libourne",
+    "animation anniversaire Gironde",
+    "grands jeux Bordeaux",
+    "team building Gironde",
+    "EVG animation",
+    "AnimAction33",
   ],
-  authors: [{ name: "Anim'Action33" }],
+  authors: [{ name: "AnimAction33" }],
   openGraph: {
     type: "website",
     locale: "fr_FR",
-    url: "https://gwenviet.fr",
-    siteName: "Anim'Action33",
+    url: "https://animaction33.fr",
+    siteName: "AnimAction33",
     images: [{ url: "/og-image.jpg", width: 1200, height: 630 }],
   },
   twitter: { card: "summary_large_image" },
   robots: { index: true, follow: true },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="fr" className="h-full">
-      <body className="min-h-full flex flex-col font-nunito">
+    <html lang="fr">
+      <body className="font-body">
+        <SplashScreen />
         <Header />
-        <main className="flex-1">{children}</main>
+        <main className="pt-20 lg:pt-24">{children}</main>
         <Footer />
-        <StickyBar />
         <WhatsAppButton />
       </body>
     </html>

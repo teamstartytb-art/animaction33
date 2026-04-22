@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160">
+  <circle cx="80" cy="80" r="72" fill="none" stroke="#FFFDF6" stroke-width="6"/>
+  <circle cx="80" cy="80" r="54" fill="none" stroke="#FFFDF6" stroke-width="4"/>
+  <circle cx="62" cy="72" r="6" fill="#FFFDF6"/>
+  <circle cx="98" cy="72" r="6" fill="#FFFDF6"/>
+  <path d="M60 95 Q80 112 100 95" stroke="#FFFDF6" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <circle cx="40" cy="55" r="14" fill="none" stroke="#FFFDF6" stroke-width="4"/>
+  <circle cx="120" cy="55" r="14" fill="none" stroke="#FFFDF6" stroke-width="4"/>
+  <text x="80" y="140" font-family="Arial Black, Archivo Black, sans-serif" font-size="14" font-weight="900" fill="#FFFDF6" text-anchor="middle">AA33</text>
+</svg>
