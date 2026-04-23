@@ -58,27 +58,20 @@ export function Header() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between gap-4">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 shrink-0">
+          <Link href="/" className="flex items-center shrink-0" aria-label="AnimAction33 — Accueil">
             <motion.div
               whileHover={{ rotate: [-2, 2, -2, 0], transition: { duration: 0.4 } }}
             >
               <Image
-                src="/logo-icon.svg"
+                src="/logo-final.png"
                 alt="AnimAction33"
-                width={60}
+                width={180}
                 height={60}
-                className="object-contain"
+                sizes="180px"
+                className="object-contain h-auto w-[140px] md:w-[180px]"
                 priority
               />
             </motion.div>
-            <div className="flex flex-col leading-none">
-              <span className="font-display text-2xl text-aa-blue tracking-tight">
-                ANIMACTION
-              </span>
-              <span className="font-display text-2xl text-aa-red tracking-tight -mt-1">
-                33
-              </span>
-            </div>
           </Link>
 
           {/* Nav desktop */}

@@ -30,11 +30,12 @@ export default function NotFound() {
           className="mb-6 inline-block"
         >
           <Image
-            src="/logo-icon.svg"
+            src="/logo-icon.png"
             alt="AnimAction33"
             width={180}
             height={180}
-            className="object-contain drop-shadow-lg"
+            sizes="180px"
+            className="object-contain h-auto w-[180px] drop-shadow-lg"
           />
         </motion.div>
 

@@ -16,7 +16,7 @@ const faqs = [
   },
   {
     q: "Comment se passe la réservation ?",
-    a: "Étape 1 — Vous nous contactez (formulaire, téléphone, WhatsApp). Étape 2 — On échange pour cerner votre projet. Étape 3 — Vous recevez un devis personnalisé sous 24h. Étape 4 — Confirmation avec acompte : votre date est bloquée.",
+    a: "Étape 1 — Vous nous contactez (formulaire, téléphone, WhatsApp). Étape 2 — On échange pour cerner votre projet. Étape 3 — Vous recevez un devis personnalisé sous 48h. Étape 4 — Confirmation avec acompte : votre date est bloquée.",
   },
   {
     q: "Avez-vous une assurance ?",
@@ -28,7 +28,7 @@ const faqs = [
   },
   {
     q: "Quels sont vos tarifs ?",
-    a: "Les animations anniversaires démarrent à 199€. Chaque événement étant unique (durée, nombre de participants, matériel, lieu), nous établissons un devis gratuit et personnalisé sous 24h — sans engagement.",
+    a: "Les animations anniversaires démarrent à 199€. Chaque événement étant unique (durée, nombre de participants, matériel, lieu), nous établissons un devis gratuit et personnalisé sous 48h — sans engagement.",
   },
 ];
 

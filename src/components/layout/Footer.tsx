@@ -39,7 +39,7 @@ export function Footer() {
             Réservez votre date dès maintenant
           </h2>
           <p className="text-aa-ink/70 text-lg mb-8">
-            Devis gratuit et personnalisé sous 24h — Disponible 7j/7 en Gironde
+            Devis gratuit et personnalisé sous 48h — Disponible 7j/7 en Gironde
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <AAButton variant="primary" size="lg" href="/contact">
@@ -56,18 +56,15 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
         {/* Brand */}
         <div>
-          <div className="flex items-center gap-3 mb-5">
+          <div className="mb-5">
             <Image
-              src="/logo-white.svg"
+              src="/logo-white.png"
               alt="AnimAction33"
-              width={60}
+              width={180}
               height={60}
-              className="object-contain"
+              sizes="180px"
+              className="object-contain h-auto w-[180px]"
             />
-            <div className="flex flex-col leading-none">
-              <span className="font-display text-xl text-aa-yellow">ANIMACTION</span>
-              <span className="font-display text-xl text-aa-red">33</span>
-            </div>
           </div>
           <p className="text-aa-paper/70 text-sm leading-relaxed mb-5">
             Créateur d&apos;expériences immersives et animateur événementiel en Gironde. Vivez

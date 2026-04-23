@@ -61,11 +61,12 @@ export function SplashScreen() {
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             >
               <Image
-                src="/logo-final.svg"
+                src="/logo-final.png"
                 alt="AnimAction33"
                 width={320}
                 height={320}
-                className="object-contain drop-shadow-2xl"
+                sizes="320px"
+                className="object-contain h-auto w-[320px] max-w-[80vw] drop-shadow-2xl"
                 priority
               />
             </motion.div>

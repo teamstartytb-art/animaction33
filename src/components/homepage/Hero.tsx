@@ -77,12 +77,13 @@ export function Hero() {
               </p>
             </div>
             <div>
-              <div className="font-display text-4xl text-aa-ink flex items-center gap-1">
-                <Star size={28} className="fill-aa-yellow stroke-aa-ink" />
-                4.9
+              <div className="flex items-center gap-0.5">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} size={28} className="fill-aa-yellow stroke-aa-ink" />
+                ))}
               </div>
-              <p className="text-sm text-aa-ink/60 uppercase tracking-wider font-semibold">
-                Note moyenne
+              <p className="text-sm text-aa-ink/60 uppercase tracking-wider font-semibold mt-2">
+                Avis clients
               </p>
             </div>
             <div>
@@ -122,11 +123,12 @@ export function Hero() {
             whileInView={{ opacity: 1, scale: 1 }}
           >
             <Image
-              src="/logo-final.svg"
+              src="/logo-final.png"
               alt="Mascotte AnimAction33"
               width={520}
               height={520}
-              className="object-contain drop-shadow-2xl max-w-full"
+              sizes="(max-width: 1024px) 320px, 520px"
+              className="object-contain drop-shadow-2xl max-w-full h-auto"
               priority
             />
           </motion.div>

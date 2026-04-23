@@ -27,23 +27,17 @@ export function Testimonials() {
             Ils nous <span className="text-aa-red">font confiance</span>
           </h2>
 
-          {/* Note Google */}
-          <a
-            href="https://g.page/animaction33"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 mt-6 bg-aa-paper border-3 border-aa-ink rounded-full px-6 py-3 shadow-pop-md pop-shadow-hover"
-          >
+          {/* Satisfaction chip (sans note chiffrée) */}
+          <div className="inline-flex items-center gap-3 mt-6 bg-aa-paper border-3 border-aa-ink rounded-full px-6 py-3 shadow-pop-md">
             <div className="flex items-center gap-1">
               {Array.from({ length: 5 }).map((_, i) => (
                 <Star key={i} size={22} className="fill-aa-yellow stroke-aa-ink" />
               ))}
             </div>
-            <span className="font-display text-lg text-aa-ink">4.9 / 5</span>
-            <span className="text-aa-ink/60 text-sm font-semibold uppercase tracking-wider">
-              Avis Google
+            <span className="font-display text-base md:text-lg text-aa-ink uppercase tracking-wide">
+              Des dizaines de familles satisfaites
             </span>
-          </a>
+          </div>
         </motion.div>
 
         {testimonials.length === 0 ? (

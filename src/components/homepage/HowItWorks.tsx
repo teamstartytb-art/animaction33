@@ -14,7 +14,7 @@ const steps = [
     num: "02",
     emoji: "💬",
     title: "On échange",
-    desc: "On définit votre projet ensemble — Réponse sous 24h.",
+    desc: "On définit votre projet ensemble — Réponse sous 48h.",
     color: "#6B9AEA",
   },
   {
